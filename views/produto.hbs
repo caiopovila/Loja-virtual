@@ -1,0 +1,72 @@
+<div class="row mt-5">
+    <div class="row col-md-5 mx-auto">
+        <div id="full">
+            <img class="img-fluid" src="{{imgs.[0].img}}" alt="">
+        </div>
+
+            <div id="mini" class="d-flex align-content-stretch flex-wrap">
+                {{#forEach imgs}}
+                    <img onclick="alterna('{{img}}')" src="{{img}}" alt="" class="img-thumbnail img-fluid w-25">
+                {{/forEach}}
+            </div>
+    </div>
+    <div class="col-md-5 mt-5">
+        <div>
+            <p>{{ prod.nome }}</p>
+            <p>{{ prod.descricao }}</p>
+            <p>{{ prod.preco }} R$</p>
+            <p><label for="cors">Cores disponíveis</label>
+            <select class="form-control" id="cors">
+                {{#forEach cor}}
+                    <option value="{{cor}}">{{cor}}</option>
+                {{/forEach}}
+            </select></p>
+            <p><label for="tams">Tamanhos disponíveis</label>
+            <select class="form-control" id="tams">
+                {{#forEach tamanho}}
+                    <option value="{{tamanho}}">{{tamanho}}</option>
+                {{/forEach}}
+            </select></p>  
+            <p><img src="/img/badd1.png" onclick="addSacola({{prod.produto}}, '{{prod.nome}}', {{prod.preco}}, '{{imgs.[0].img}}')" class="addSacola img-fluid" alt="adicionar à sacola"></p>          
+            <p><img src="/img/bcompra1.png" class="bt s mt-3" alt="comprar produto"></p>
+        </div>
+    </div>
+</div>
+<hr>
+
+<h2 class="text-center mb-5">Comentarios</h2>
+
+{{#if coment}}
+{{#forEach coment}}
+<section class="media" id="{{id_comentario}}">
+        <section class="w-25">
+            <img src="data:image/png;base64,{{foto_perfil}}" class="img-thumbnail w-25 " alt="foto de perfil do {{nome}}">
+        </section>
+        <article class="media-body">
+            <h5>{{nome}}</h5>
+            <p>{{comentario}}</p>
+            <p class="text-muted">{{data_registro}}</p>
+        </article>
+</section>
+<hr>
+{{/forEach}}
+{{/if}}
+
+{{#if m}}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Atente-se</strong> {{ m }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}
+
+{{#if usu}}
+<h3 class="text-center mt-5">Envie um comentário</h3>
+<form action="/produto/{{prod.produto}}" method="POST">
+    <div class="form-group">
+        <textarea class="form-control" name="coment" id="coment" cols="30" rows="10"></textarea>
+    </div>
+    <button type="submit" class="btn btn-block btn-primary">Enviar</button>
+</form>
+{{/if}}

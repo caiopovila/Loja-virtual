@@ -1,0 +1,10 @@
+<div class="row row-cols-1 row-cols-md-3">
+ {{#forEach prod}}
+    <div class="card  border-light">
+        <a href="/produto/{{id_produto}}"><img src="{{img.img}}" class="card-img-top" alt="{{ nome }}"></a>
+        <div class="card-body text-center">
+            <span class="badge badge-success"><h1>{{ preco }} R$</h1></span>
+        </div>
+    </div>
+{{/forEach}}
+</div>

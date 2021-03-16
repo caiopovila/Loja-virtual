@@ -1,0 +1,134 @@
+<section class="text-center mt-5">
+    <img class="img-thumbnail w-25 h-50" src="data:image/png;base64,{{usu.foto_perfil}}" alt="foto de perfil">
+</section>
+
+<h1 class="text-center mt-5">{{ usu.nome }}</h1>
+
+{{#if m}}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Atente-se</strong> {{ m }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}
+
+
+{{#if s}}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Boa!</strong> {{ s }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}
+
+<div class="accordion mt-5" id="accordionExample">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="false" aria-controls="collapseOne">
+                    Foto
+                </button>
+            </h2>
+        </div>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                <form action="/cadastro/foto" method="post" enctype="multipart/form-data">
+                    <section class="custom-file">
+                        <label class="custom-file-label" for="imgUp">Atualizar imagem</label>
+                        <input type="file" class="custom-file-input" name="imgUp" id="imgUp">
+                    </section>
+                    <button class="btn btn-primary btn-block" type="submit">Alterar</button>
+                </form>
+                <hr>
+                <h5><a href="/cadastro/foto/remove">Remover</a></h5>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="false" aria-controls="collapseTwo">
+                    Dados
+                </button>
+            </h2>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+                <form action="/cadastro/usu" method="post">
+
+                    <section class="form-group">
+                        <label for="nome">Cliente</label>
+                        <input type="text" name="nome" id="nome" class="form-control" value="{{usu.nome}}">
+                    </section>
+
+                    <section class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" value="{{usu.email}}">
+                    </section>
+
+                    <section class="form-group">
+                        <label for="sA">Senha atual</label>
+                        <input type="password" class="form-control" required name="sA" id="sA">
+                    </section>
+
+                    <section class="form-group">
+                        <label for="nS">Nova senha (opcional)</label>
+                        <input type="password" class="form-control" name="nS" id="nS">
+                    </section>
+
+                    <button type="submit" class="btn btn-primary btn-block">Atualizar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
+                    aria-expanded="false" aria-controls="collapseThree">
+                    Endereço
+                </button>
+            </h2>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+            <div class="card-body">
+                <form action="/cadastro/end" id="end" method="POST">
+                    <h1>Endereço: </h1>
+
+                    <section class="form-group">
+                        <label for="log">logradouro</label>
+                        <input type="text" name="log" class="form-control" required id="log" value="{{usu.logradouro}}">
+                    </section>
+
+                    <section class="form-group">
+                        <label for="num">numero</label>
+                        <input type="number" class="form-control" name="num" required id="num" value="{{usu.numero}}">
+                    </section>
+
+                    <section class="form-group">
+                        <label for="cid">Cidade</label>
+                        <input type="text" class="form-control" name="cid" required id="cid" value="{{usu.cidade}}">
+                    </section>
+
+                    <section class="form-group">
+                        <label for="est">Estado</label>
+                        <input type="text" class="form-control" name="est" required id="est" value="{{usu.estado}}">
+                    </section>
+
+                    <section class="form-group">
+                        <label for="cep">CEP</label>
+                        <input type="number" class="form-control" name="cep" required id="cep" value="{{usu.cep}}">
+                    </section>
+
+                    <button type="submit" class="btn btn-primary btn-block">Atualizar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

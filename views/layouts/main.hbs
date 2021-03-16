@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Loja virtual</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/buttons.css">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <div class="dropdown">
+        <button style="border: none;  background-color: #f8f9fa;" type="button" id="dropdownmenu2"
+          data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"  data-toggle="tooltip" data-placement="bottom" title="Menu">
+          <img src="/img/bmenu.png"></img>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownmenu2">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="/inicio">Início</a>
+            </li>
+            {{#forEach cat}}
+            <li class="nav-item">
+              <a class="nav-link" href="/categorias/{{id_categoria}}">{{nome}}</a>
+            </li>
+            {{/forEach}}
+            <li class="nav-item">
+              <a class="nav-link" href="/sobre">Sobre</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/promocoes">Promoções</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <a class="navbar-brand d-flex justify-content-center mx-auto" id="lp" href="/inicio">
+        <img src="/img/logopequeno.png" alt="logo pequeno da loja virtal de demonstração">
+      </a>
+
+      <a class="navbar-brand" id="iSacola" href="/carrinho" data-toggle="tooltip" data-placement="bottom" title="Sacola de compras">
+        <img src="/img/isacola.png" alt="incone da sacola de compras">
+      </a>
+
+      <div class="dropdown">
+        <button style="border: none; background-color: #f8f9fa;" type="button" id="dropdownMenuButton"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  data-toggle="tooltip" data-placement="bottom" title="Perfil">
+          <img class="btU" src="/img/iperfil.png" alt="incone do perfil de usuario">
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+        {{#if usu}}
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="/cadastro">perfil</a></li>
+            <li class="nav-item"><a class="nav-link" href="/comentarios">Comentarios</a></li>
+            <li class="nav-item"><a class="nav-link" href="/entrar/sair">Sair</a></li>
+          </ul>
+        {{else}}
+          <form action="javascript:login();" id="formLogin" method="POST" name="formLogin" class="px-4 py-3">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" name="email" class="form-control" id="email" required
+                placeholder="email@example.com">
+            </div>
+            <div class="form-group">
+              <label for="senha">Senha</label>
+              <input type="password" name="senha" class="form-control" id="senha" required
+                placeholder="****">
+            </div>
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                <label class="form-check-label" for="dropdownCheck">
+                  Lembrar-me
+                </label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+            <hr>
+            <a class="btn btn-primary" href="/entrar/facebook">...Com Facebook.</a>
+          </form>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/cadastrar">Novo por aqui? Cadastre-se</a>
+          <a class="dropdown-item" href="#">Esqueceu a senha?</a>
+        </div>
+      {{/if}}
+      </div>
+    </nav>
+
+<section class="container">
+  {{{body}}}
+</section>
+
+    <footer>
+
+      <script src="/js/jquery.min.js"></script>
+      <script src="/js/bootstrap.bundle.js"></script>
+      <script src="/js/produto.js"></script>
+      <script src="/js/sacola.js"></script>
+      <script src="/js/login.js"></script>
+    </footer>
+  </body>
+
+</html>

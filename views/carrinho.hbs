@@ -1,0 +1,67 @@
+<div class="row mt-5">
+    <div class="list-group" id="sacola">
+
+    </div>
+    <div class="col-md-5">
+        <ul class="list-group">
+            <li class="list-group-item">Nome: {{usu.nome}}</li>
+            <li class="list-group-item">Logradouro: {{usu.logradouro}}</li>
+            <li class="list-group-item">Numero: {{usu.numero}}</li>
+            <li class="list-group-item">Cep: {{usu.cep}}</li>
+            {{#if usu}}<li class="list-group-item"><a href="/cadastro" class="btn btn-primary btn-block">editar</a></li>{{/if}}
+        </ul>
+        <ul class="list-group mt-3">
+            <li class="list-group-item">subtotal<span class="float-right"><span id="totalCompra"></span> R$</span></li>
+            <li class="list-group-item">frete<span class="float-right"><span id="frete">0</span> R$</span></li>
+            <li class="list-group-item">total<span class="float-right"><span id="total">0</span> R$</span></li>
+        </ul>
+
+        <a href="/inicio"><img class="bt d mt-3" src="/img/bmais1.png" alt="Botão mais produtos"></a>
+
+        <img class="bt s mt-3" id="btCompra" src="/img/bcompra1.png" alt="">
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    let sacola = document.getElementById('sacola');
+
+        total = 0;
+
+            var carrinho = JSON.parse(localStorage.getItem('lista-carrinho') || '[]');
+            if (carrinho[0]) {
+            for (let item of carrinho) {
+                        sacola.innerHTML += `
+                            <div id='${item.id}${item.cor}${item.tam}' class="card mb-3" style="max-width: 540px;">                                
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <img src="${item.foto}" class="card-img" alt="...">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <button type="button" onclick="removeCarrinho(${item.id}, '${item.cor}', '${item.tam}', ${item.preco})" aria-label="Close" class="close p-2 float-right" data-toggle="tooltip" data-placement="bottom" title="Remover item">
+                                            <span>&times;</span>
+                                        </button>                                           
+                                        <div class="card-body">
+                                            <h5 class="card-title">${item.nome}</h5>
+                                            <p class="card-text">Cor: ${item.cor} / Tamanho: ${item.tam}.</p>
+                                            <p class="card-text"><small class="text-muted">Quantidade: <span id='quant${item.id}'>${item.quantidade}</span></small></p>
+                                            <p class="card-text float-right"><small class="text-muted">${item.preco} R$</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                            </div>`;
+                    total = total + item.preco * item.quantidade;
+                }
+        document.getElementById('totalCompra').innerText = total;
+        document.getElementById('total').innerText = total;
+        } else {
+            sacola.innerHTML = `
+                <div class="alert alert-info" role="alert">
+                Nenhum produto!
+                </div>            
+            `;
+            document.getElementById('btCompra').style.display = 'none';
+        }
+        
+</script>

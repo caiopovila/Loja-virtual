@@ -1,0 +1,19 @@
+.addSacola:hover {
+    content: url('/img/badd2.png');
+}
+
+.addSacola {
+    cursor: pointer;
+}
+
+.bt {
+    cursor: pointer;
+}
+
+.s:hover {
+    content: url('/img/bcompra2.png');
+}
+
+.d:hover {
+    content: url('/img/bmais2.png');
+}

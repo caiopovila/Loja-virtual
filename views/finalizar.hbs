@@ -1,0 +1,52 @@
+<h1 class="text-center">Falta pouco {{usu.nome}}...</h1>
+<hr>
+
+<h3>Detalhes sobre o cartão:</h3>
+    <form action="/finalizar" method="POST">
+        <section class="form-group">
+            <label for="n">Nome</label>
+            <input type="text" class="form-control" value="{{usu.nome}}" id="n">
+        </section>
+        <section class="form-group">
+            <label for="cpf">CPF</label>
+            <input type="number" class="form-control" placeholder="exemplo 000.000.000-00" id="cpf">
+        </section>
+        <section class="form-group">
+            <label for="cart">Cartão de crédito</label>
+            <input type="number" class="form-control" id="cart">
+        </section>
+        <section class="form-group">
+            <label for="cvv">CVV</label>
+            <input type="number" class="form-control" id="cvv">
+        </section>
+
+        <h3>Detalhes sobre o pedido:</h3>
+        {{#if prods}}
+            {{#forEach prods}}
+                {{#if (eq [0].estado 'aberto') }}
+                    <input type="number" class="invisible" name="car" value="{{[0].id}}">
+                    {{#forEach this}}
+                            <section>
+                                {{#if nome}}
+                                <article>
+                                    {{nome}} - <span class="badge badge-secondary"> Preço: {{preco}} </span> 
+                                </article>
+                                <hr>
+                                {{/if}}
+                                {{#if soma}}
+                                <h1> <span class="badge badge-primary"> TOTAL: {{soma}} </span> </h1>
+                                <input type="number" class="invisible" name="total" value="{{soma}}">   
+                                {{/if}} 
+                            </section>
+                    {{/forEach}}
+                {{/if}}
+            {{/forEach}}
+        {{/if}}
+    {{#if usu.id_endereco}}
+        <h3>Detalhes sobre o endereço:</h3>
+        {{usu.logradouro}} - {{usu.numero}}  {{usu.cidade}} {{usu.estado}} <a href="/cadastro#end">Editar</a>
+        <h1 class="text-center"><button type="submit" class="btn btn-success" href="/finalizar">Finalizar</button></h1>
+    {{else}}
+        <h1 class="text-center"><a href="/cadastro#end" class="btn btn-warning">Informe o endereço!</a></h1>
+    {{/if}}
+    </form>
